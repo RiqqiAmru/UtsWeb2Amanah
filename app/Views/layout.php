@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" id="debugbar_dynamic_script"></script>
   <!-- ini belom ketemu file nya -->
-  <script type="text/javascript" id="debugbar_loader" data-time="1" src="<?php echo base_url('plugins/'); ?>/index.php?debugbar"></script>
+  <script type="text/javascript" id="debugbar_loader" data-time="1"
+    src="<?php echo base_url('plugins/'); ?>/index.php?debugbar"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -40,14 +41,15 @@
     <!-- sidebar -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="<?php echo base_url('/'); ?>" class="brand-link">
-        <img src="<?php echo base_url(); ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?php echo base_url(); ?>/img/AdminLTELogo.png" alt="AdminLTE Logo"
+          class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Dashboard</span>
       </a>
 
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="<?php echo base_url(); ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="<?php echo base_url(); ?>/img/riqqi.jpeg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
             <a href="#" class="d-block">Riqqi</a>
@@ -62,17 +64,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('dosen'); ?>" class="nav-link">
+              <a href="<?php echo base_url('obat'); ?>" class="nav-link">
                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                <p>Dosen</p>
-              </a>
-            </li>
-
-            <li class="nav-header">ACCOUNT</li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('auth/logout'); ?>" class="nav-link">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p class="text">Logout</p>
+                <p>Obat</p>
               </a>
             </li>
           </ul>
@@ -80,9 +74,24 @@
       </div>
     </aside>
     <!-- end sidebar -->
-
-    <?= $this->renderSection('content') ?>
-
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark"><?= $title; ?></h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active"><?= $title; ?></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?= $this->renderSection('content') ?>
+    </div>
     <!-- footer -->
     <aside class="control-sidebar control-sidebar-dark">
       <div class="p-3">
@@ -95,13 +104,35 @@
       <div class="float-right d-none d-sm-inline">
         Sistem Informasi Akademi
       </div>
-      <strong>Copyright &copy; 20214-2022 <a href="<?php echo base_url('/'); ?>">Riqqi</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 20214-2022 <a href="<?php echo base_url('/'); ?>">Riqqi</a>.</strong> All rights
+      reserved.
     </footer>
   </div>
 
   <script src="<?php echo base_url('plugins'); ?>/jquery/jquery.min.js"></script>
   <script src="<?php echo base_url('plugins'); ?>/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?php echo base_url(); ?>/js/adminlte.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $("#jenis_obat").change(function() {
+      filter();
+    });
+    $("#status_obat").change(function() {
+      filter();
+    });
+    $("#keyword").keypress(function(event) {
+      if (event.keyCode == 13) {
+        filter();
+      } //jika klik enter
+    });
+    var filter = function() {
+      var keyword = $("#keyword").val();
+      var jenis = $("#jenis_obat").val();
+      var status = $("#status_obat").val();
+      window.location.replace("/obat?keyword=" + keyword + "&jenis=" + jenis + "&status=" + status);
+    }
+  });
+  </script>
 </body>
 
 </html>
